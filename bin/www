@@ -15,6 +15,10 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
+const envir = process.env.NODE_ENV || "development";
+if( envir==="development" )
+  console.log(` 🚀 Serveur Express est lancé sur le port : ${port}`);
+
 /**
  * Create HTTP server.
  */

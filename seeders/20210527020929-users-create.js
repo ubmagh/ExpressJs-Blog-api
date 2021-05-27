@@ -22,7 +22,7 @@ module.exports = {
         username: faker.internet.userName(),
         email: faker.internet.email(),
         password: faker.internet.password(),
-        role: faker.helpers.randomize([ 'admin', 'guest']),
+        role: faker.helpers.randomize([ 'admin', 'author', 'guest']),
         createdAt: created_at,
         updatedAt: faker.date.between( created_at, new Date())
       }], {});
