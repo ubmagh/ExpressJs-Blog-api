@@ -1,7 +1,8 @@
 'use strict';
 
 const faker = require('faker');
-faker.locale = "fr";
+
+faker.locale = "en";
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
