@@ -1,5 +1,6 @@
 var router = require('express').Router();
 const usersRepo = require('../repositories/users');
+const { createUser, updateUser, destroyUser } = require('../controllers/userController');
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
@@ -7,11 +8,11 @@ router.get('/', async function(req, res, next) {
 });
  
 router.post('/',async function(req, res, next) {
-  res.send( await usersRepo.addUser( req.body.user ) );
+  await createUser(req, res);
 });
 
 router.put('/',async function(req, res, next) {
-  res.send( await usersRepo.updateUser( req.body.user ) );
+  await updateUser(req, res);
 });
 
 router.get('/admins',async function(req, res, next) {
@@ -26,12 +27,16 @@ router.get('/guests',async function(req, res, next) {
   res.send( await usersRepo.getGuests() );
 });
 
+router.get('/count',async function(req, res, next) {
+  res.send( { num: await usersRepo.numberOfUsers() } );
+});
+
 router.get('/:id',async function(req, res, next) {
   res.send( await usersRepo.getUser( req.params.id) );
 });
 
 router.delete('/:id',async function(req, res, next) {
-  res.send( await usersRepo.deleteUser( req.bo ) );
+  await destroyUser( req, res);
 });
 
 

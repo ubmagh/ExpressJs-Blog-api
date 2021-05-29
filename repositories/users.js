@@ -1,5 +1,6 @@
 const { User } = require('../models')
 
+
 module.exports = {
     getAllUsers() {
         return User.findAll();
@@ -7,7 +8,7 @@ module.exports = {
     
     // méthodes à implémenter
     getUsers(offset = 0, limit = 10) { 
-        return User.findAll({ offset: parseInt(offset), limit: parseInt(limit)});
+        return User.findAll({  offset: parseInt(offset), limit: parseInt(limit)});
     },
     getAdmins() { 
         return User.findAll({ where:{ role:"admin" } });
@@ -19,12 +20,12 @@ module.exports = {
         return User.findAll({ where:{ role:"guest" } });
     },
     getUser(id) { 
-        return User.findByPk(id);
+        return User.findOne({ where: { id: id } });
     },
     getUserByEmail(email) { 
         return User.findOne({ where: { email: email } });
     },
-    addUser(user) { 
+    addUser(user) {
         return User.create({
             username: user.username,
             email: user.email,
@@ -33,14 +34,21 @@ module.exports = {
         });
     },
     updateUser( user ) { 
-        const userObject = User.findByPk(user.id);
-        return userObject.update( {}, { where: { id: user.id}});
+        const userObject = {...user};
+        delete userObject.id;
+        User.update( userObject, { where: { id: user.id} });// l'option returning marche seulement avec postgres mais pas avec mysql :(
+        return user;
     },
     deleteUser(id) { 
-        return user.destroy( { where: { id: id}});
+        return User.destroy( { where: { id: id}});
     },
-    
-    // D'autres méthodes jugées utiles
 
+    // D'autres méthodes jugées utiles
+    numberOfUsers(){ // Pour faire la pagination
+        return   User.count({}) ;
+    },
+    getUserByUsername(username){
+        return User.findOne({ where: { username: username } });
+    }
 }
     
