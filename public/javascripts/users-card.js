@@ -11,6 +11,8 @@ function setItemsPerPage(num){
         else
             $(node).removeAttr('disabled');
     });
+    currentPage = 1;
+    render_pagination();
     fetch_users();
 }
 
