@@ -123,6 +123,8 @@ createUserModal.addEventListener('hidden.bs.modal', function (event) {
     $($(createUserModal).find('option')[0]).removeAttr('selected').attr('selected',true);
     $('.userCreateForm').removeClass('d-none');
     $('.CU_success').addClass('d-none');
+    $('.notSubmittedC').removeClass('d-none');
+    $('.SubmittedC').addClass('d-none');
 });
 
 function DisplayError( id, message){
@@ -164,6 +166,8 @@ function createUser(){
             $('.CU_success').removeClass('d-none');
             console.log(resp);
             const user= {username: resp.username, role: resp.role, password: resp.password, id: resp.id, email: resp.email  } 
+            $('.notSubmittedC').addClass('d-none');
+            $('.SubmittedC').removeClass('d-none');
             usersList.push(user);
             RenderUsersList(usersList);
             render_pagination();
@@ -183,6 +187,8 @@ function createUser(){
                 if( errors.password )
                     DisplayError( "#CU_pwd1", errors.password);
             }
+            $('.notSubmittedC').addClass('d-none');
+            $('.SubmittedC').removeClass('d-none');
         }
     });
 }
@@ -203,6 +209,8 @@ EditUserModal.addEventListener('hidden.bs.modal', function (event) {
     $('.EU_success').addClass('d-none');
     const saveBtn = $('#EditUserModal .modal-footer').find('button')[0];
     $(saveBtn).data( 'userid', null);
+    $('.notSubmittedE').removeClass('d-none');
+    $('.SubmittedE').addClass('d-none');
 });
 
 function edit_user( id){
@@ -260,6 +268,8 @@ function updateUser(){
                     elem.password = resp.password;
                 }
             } );
+            $('.notSubmittedE').addClass('d-none');
+            $('.SubmittedE').removeClass('d-none');
             RenderUsersList( usersList ); // actualiser les enregistrements dans le tableau
         },
         error : function(resp){
@@ -277,6 +287,8 @@ function updateUser(){
                 if( errors.password )
                     DisplayError( "#EU_pwd1", errors.password);
             }
+            $('.notSubmittedE').addClass('d-none');
+            $('.SubmittedE').removeClass('d-none');
         }
     });
 }
@@ -294,6 +306,8 @@ DeleteUserModal.addEventListener('hidden.bs.modal', function (event) {
     $('.userDeleteBody .putusername').text("");
     const deleteBtn = $('#DeleteUserModal .modal-footer').find('button')[0];
     $(deleteBtn).data( 'userid', null);
+    $('.notSubmittedD').removeClass('d-none');
+    $('.SubmittedD').addClass('d-none');
 });
 
 function delete_user(id){
@@ -325,6 +339,8 @@ function destroyUser(){
                     usersList.splice( ind, 1);
                 }
             } );
+            $('.notSubmittedD').addClass('d-none');
+            $('.SubmittedD').removeClass('d-none');
             RenderUsersList( usersList ); // actualiser les enregistrements dans le tableau
             render_pagination(); // actualiser le nombre et la vue de pagination
         },
@@ -338,6 +354,8 @@ function destroyUser(){
             }else{
                 DisplayError( '#DU_id', " Une erreur est servenue, Veuillez actualiser la page ! "); 
             }
+            $('.notSubmittedD').addClass('d-none');
+            $('.SubmittedD').removeClass('d-none');
         }
     });
 }

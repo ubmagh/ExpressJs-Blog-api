@@ -1,5 +1,6 @@
-const { User } = require('../models')
-
+const { User } = require('../models');
+const { getCommentsByUserId } = require('./comments');
+const { getArticlesByUserId } = require('./articles');
 
 module.exports = {
     getAllUsers() {
@@ -34,10 +35,10 @@ module.exports = {
         });
     },
     updateUser( user ) { 
-        const userObject = {...user};
+        let userObject = {...user};
         delete userObject.id;
-        User.update( userObject, { where: { id: user.id} });// l'option returning marche seulement avec postgres mais pas avec mysql :(
-        return user;
+        userObject.updatedAt = new Date();
+        return User.update( userObject, { where: { id: user.id} });// l'option returning marche seulement avec postgres mais pas avec mysql :(
     },
     deleteUser(id) { 
         return User.destroy( { where: { id: id}});
@@ -49,6 +50,12 @@ module.exports = {
     },
     getUserByUsername(username){
         return User.findOne({ where: { username: username } });
+    },
+    GetUserArticles(id){
+        return getArticlesByUserId(id);
+    },
+    GetUserComments(id){
+        return getCommentsByUserId(id);
     }
 }
     

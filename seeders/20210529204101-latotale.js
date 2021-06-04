@@ -72,15 +72,18 @@ module.exports = {
 
     const set_comments= ()=>{
       articles.forEach( article=>{
-        let num_of_tags = faker.datatype.number({min:0, max:10}); // nbr de commentaires pour chaque article
+        let num_of_comments = faker.datatype.number({min:0, max:10}); // nbr de commentaires pour chaque article
         const created_at = faker.date.future( 4, article.createdAt);
-        comments.push({
-          content : faker.lorem.sentences(4),
-          ArticleId: article.id,
-          UserId : (faker.random.arrayElement( users )).id,
-          createdAt : created_at,
-          updatedAt: faker.date.between( created_at, new Date())
-        });
+        while(num_of_comments){
+          comments.push({
+            content : faker.lorem.sentences(4),
+            ArticleId: article.id,
+            UserId : (faker.random.arrayElement( users )).id,
+            createdAt : created_at,
+            updatedAt: faker.date.between( created_at, new Date())
+          });
+          num_of_comments--;
+        }
       });
     };
     
