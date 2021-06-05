@@ -47,7 +47,8 @@ module.exports = {
           created_articles--;
           articles.push({
             title: faker.lorem.words(6),
-            content: faker.lorem.paragraphs(3),
+            content: faker.lorem.paragraphs(6),
+            image: faker.image.imageUrl(),
             UserId : user.id,
             createdAt: createdAt,
             updatedAt: faker.date.between( createdAt, new Date())

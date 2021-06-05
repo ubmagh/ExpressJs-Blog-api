@@ -1,6 +1,4 @@
 const { Comment, sequelize } = require('../models')
-const { getUser } = require('./users');
-const { getArticle } = require('./articles');
 const { QueryTypes } = require('sequelize');
 
 
@@ -15,33 +13,32 @@ module.exports = {
         const date = new Date();
         return Comment.create({
             content: comment.content,
-            ArticleId: comment.articleId,
-            UserId: comment.userId,
+            ArticleId: comment.articleid,
+            UserId: comment.userid,
             createdAt: date,
             updatedAt : date
         });
     },
     updateComment( comment ) { 
-        let cmntObject = {...comment};
-        delete cmntObject.id;
-        cmntObject.updatedAt = new Date();
-        return Comment.update( cmntObject, { where: { id: comment.id} });// l'option returning marche seulement avec postgres mais pas avec mysql :(
+        const cmtId = comment.id;
+        delete comment.id;
+        comment.updatedAt = new Date();
+        return Comment.update( comment, { where: { id: cmtId } }).then( rA=>{ 
+            if(rA==1) 
+                return Comment.findOne({ where: {id: cmtId} }).then(comment=>Promise.resolve(comment)); 
+            return Promise.resolve(null);
+        });
     },
     deleteComment(id) { 
         return Comment.destroy( { where: { id: id}});
     },
     getCommentUser(id){
-        return this.getComment(id).then( comment=> getUser(comment.UserId) );
+        return this.getComment(id).then( comment=> comment.getUser() ); 
     },
     getCommentArticle(id){
-        return this.getComment(id).then( comment=> getArticle(comment.UserId) );
+        return this.getComment(id).then( comment=> comment.getArticle()  );
     },
-    getCommentsByUserId(userID){
-        return Comment.findAll({ where:{ UserId:userID } });
-    },
-    getCommentsByArticleId( articleid){
-        return Comment.findAll({ where: { ArticleId: articleid} });
-    }
+    
 
 }
     

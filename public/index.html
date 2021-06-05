@@ -6,11 +6,12 @@
   <link rel="icon" href="favicon.ico" >
   <link rel="icon" href="icon32.png" sizes="32x32" type="image/png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link href="/stylesheets/bootstrap-BootswatchLumen.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-light">
+  <nav class="navbar navbar-light border-bottom-0">
     <div class="container d-flex align-content-center flex-column">
       <a class="navbar-brand text-white py-2" href="#">
           <i class="fab fa-blogger d-inline-block align-text-top fa-2x me-1" style="margin-top: -5px;" ></i>
@@ -26,7 +27,7 @@
     <div class="py-3 px-0 mt-5 mb-4">
       <div class="card rounded-2">
         <div class="card-header bg-white pt-4 pb-2">
-          <h2 class="h2"> <i class="fas fa-users" ></i> Liste des utilisateurs :  </h2>
+          <h2 class="h2 text-center"> <i class="fas fa-users" ></i> Liste des utilisateurs :  </h2>
         </div>
         <div class="card-body py-3 px-2">
           <div id="usersList_Loading" class="d-flex">
@@ -37,17 +38,17 @@
           <div id="usersList_content" class="d-none">
             <div class="py-3 mt-2 col-12 d-flex justify-content-end">
               <div class="col-auto ms-0 me-auto ps-3">
-                <button type="button" class="btn btn-info text-white"  data-bs-toggle="modal" data-bs-target="#CreateUserModal"> <i class="fas fa-plus"></i> Créer un utilisateur </button>
+                <button type="button" class="btn btn-outline-primary"  data-bs-toggle="modal" data-bs-target="#CreateUserModal"> <i class="fas fa-plus"></i> Créer un utilisateur </button>
               </div>
               <div class="col-auto ms-auto me-0">
-                <h5 class="d-inline h5 pe-3">
+                <h5 class="d-inline h5 pe-3 text-secondary">
                 Nombre de lignes par page : 
                 </h5>
                 <div class="d-inline itemsPerPage me-2">
-                  <button type="button" class="btn btn-info text-white" data-c="10" onclick="setItemsPerPage(10)" disabled> 10 </button>
-                  <button type="button" class="btn btn-info text-white" data-c="20" onclick="setItemsPerPage(20)"> 20 </button>
-                  <button type="button" class="btn btn-info text-white" data-c="30" onclick="setItemsPerPage(30)"> 30 </button>
-                  <button type="button" class="btn btn-info text-white" data-c="40" onclick="setItemsPerPage(40)"> 40 </button>
+                  <button type="button" class="btn btn-info" data-c="10" onclick="setItemsPerPage(10)" disabled> 10 </button>
+                  <button type="button" class="btn btn-outline-info" data-c="20" onclick="setItemsPerPage(20)"> 20 </button>
+                  <button type="button" class="btn btn-outline-info" data-c="30" onclick="setItemsPerPage(30)"> 30 </button>
+                  <button type="button" class="btn btn-outline-info" data-c="40" onclick="setItemsPerPage(40)"> 40 </button>
                 </div>
               </div>
             </div>
@@ -90,7 +91,7 @@
                   <div class="form-group">
                     <label for="username">le pseudo-nom (username) : </label>
                     <input type="text" class="form-control" id="username" autocomplete="off" aria-describedby="helpId" placeholder="username" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="CU_username">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -98,7 +99,7 @@
                   <div class="form-group mt-3">
                     <label for="username">l'adresse email : </label>
                     <input type="email" class="form-control" id="email" name="email" aria-describedby="helpId" placeholder="abcd@xyz.io" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="CU_email">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -111,7 +112,7 @@
                       <option value="author"> auteur (author) </option>
                       <option value="admin"> admin </option>
                     </select>
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="CU_role">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -119,7 +120,7 @@
                   <div class="form-group mt-3">
                     <label for="psswd">le mot de passe : </label>
                     <input type="password" class="form-control" id="psswd" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="CU_pwd1">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -127,7 +128,7 @@
                   <div class="form-group mt-3">
                     <label for="psswd2">Confirmez le mot de passe : </label>
                     <input type="password" class="form-control" id="psswd2" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="CU_pwd2">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -166,14 +167,14 @@
               </div>
               <div class="modal-body">
                 <div class="userEditForm pt-2 pb-3 px-1">
-                  <div class="alert alert-warning alert-dismissible py-2 my-2 fade d-none" role="alert">
+                  <div class="alert alert-warning alert-dismissible py-2 my-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_id">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                   </div>
                   <div class="form-group">
                     <label for="username">le pseudo-nom (username) : </label>
                     <input type="text" class="form-control" id="Eusername" autocomplete="off" aria-describedby="helpId" placeholder="username" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_username">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -181,7 +182,7 @@
                   <div class="form-group mt-3">
                     <label for="username">l'adresse email : </label>
                     <input type="email" class="form-control" id="Eemail" name="Eemail" aria-describedby="helpId" placeholder="abcd@xyz.io" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_email">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -194,7 +195,7 @@
                       <option value="author"> auteur (author) </option>
                       <option value="admin"> admin </option>
                     </select>
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_role">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -202,7 +203,7 @@
                   <div class="form-group mt-3">
                     <label for="psswd">le mot de passe : </label>
                     <input type="password" class="form-control" id="Epsswd" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_pwd1">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -210,7 +211,7 @@
                   <div class="form-group mt-3">
                     <label for="psswd2">Confirmez le mot de passe : </label>
                     <input type="password" class="form-control" id="Epsswd2" maxlength="255">
-                    <div class="alert alert-warning alert-dismissible py-2 fade d-none" role="alert">
+                    <div class="alert alert-warning alert-dismissible py-2 fade d-none err" role="alert">
                       <p class="my-0" id="EU_pwd2">  </p>
                       <button type="button" class="btn-close pt-2 closeErr" ></button>
                     </div>
@@ -253,7 +254,7 @@
           <div class="modal-body">
             <div class="userDeleteBody pt-2 pb-3 px-1">
               <h5 class="h5"> voulez-vous vraiment supprimer l'utilisateur avec l'username : <span class="putusername fw-bold text-dark"></span> </h5>
-              <div class="alert alert-warning alert-dismissible py-2 my-2 fade d-none" role="alert">
+              <div class="alert alert-warning alert-dismissible py-2 my-2 fade d-none err" role="alert">
                 <p class="my-0" id="DU_id">  </p>
                 <button type="button" class="btn-close pt-2 closeErr" ></button>
             </div>
@@ -286,7 +287,7 @@
   
 
   <footer>
-    <nav class="navbar navbar-white bg-white">
+    <nav class="navbar navbar-white bg-white border-bottom-0">
       <div class="container">
         <div class="row w-100 pt-3 pb-2">
           <div class="col-12 col-lg text-center text-lg-start">

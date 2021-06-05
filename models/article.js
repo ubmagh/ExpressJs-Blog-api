@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     },
     content: DataTypes.TEXT,
+    image: DataTypes.TEXT,
     published: {
       type: DataTypes.BOOLEAN,
       defaultValue: true

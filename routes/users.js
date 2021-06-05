@@ -35,6 +35,14 @@ router.get('/:id',async function(req, res, next) {
   res.send( await usersRepo.getUser( req.params.id) );
 });
 
+router.get('/:id/articles',async function(req, res, next) {
+  res.send( await usersRepo.GetUserArticles( req.params.id) );
+});
+
+router.get('/:id/comments',async function(req, res, next) {
+  res.send( await usersRepo.GetUserComments( req.params.id) );
+});
+
 router.delete('/:id',async function(req, res, next) {
   await destroyUser( req, res);
 });

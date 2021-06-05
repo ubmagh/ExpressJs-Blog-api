@@ -6,10 +6,14 @@ function setItemsPerPage(num){
     itemsPerpage = num;
     const items = $('.itemsPerPage')[0].childNodes;
     items.forEach( node=>{
-        if( parseInt( $(node).data('c') )== num  )
+        if( parseInt( $(node).data('c') )== num  ){
             $(node).attr('disabled',true);
-        else
+            $(node).addClass('btn-info').removeClass('btn-outline-info');
+        }
+        else{
             $(node).removeAttr('disabled');
+            $(node).removeClass('btn-info').addClass('btn-outline-info');
+        }
     });
     currentPage = 1;
     render_pagination();
@@ -26,8 +30,8 @@ const users_SetLoading = bool =>{
 
 function fetch_users(){
     users_SetLoading(true);
-    $.get( "/users", { limit: parseInt(itemsPerpage), offset: parseInt( (currentPage-1)*itemsPerpage ) }).done(data=>{ usersList = data; RenderUsersList(usersList); render_pagination(); users_SetLoading(false); }).fail(()=>{
-        $('#usersList').empty().append('<tr class="bg-warning"><td colspan="5" class="text-center"> Une erreur est servenue !  </td></tr>');users_SetLoading(false);
+    $.get( "/api/users", { limit: parseInt(itemsPerpage), offset: parseInt( (currentPage-1)*itemsPerpage ) }).done(data=>{ usersList = data; RenderUsersList(usersList); render_pagination(); users_SetLoading(false); }).fail(()=>{
+        $('#usersList').empty().append('<tr class="bg-danger"><td colspan="5" class="text-center"> Une erreur est servenue !  </td></tr>');users_SetLoading(false);
     });
 }
 
@@ -54,7 +58,7 @@ const RenderUsersList = (usersList)=>{
         );
     }else{
         parent.empty();
-        parent.append(' <tr class="bg-info"><td colspan="5" class="text-center"> Aucun utilisateur n\'a été trouvé !  </td></tr> ');
+        parent.append(' <tr class="bg-warning"><td colspan="5" class="text-center"> Aucun utilisateur n\'a été trouvé !  </td></tr> ');
     }
 }
 
@@ -75,7 +79,7 @@ function user_nextPage(){
 
 function render_pagination(){
     var pages =0;
-    $.get( "/users/count", null).done(data=>{ 
+    $.get( "/api/users/count", null).done(data=>{ 
         pages = parseInt(data.num);
         pages =  Math.ceil( pages/itemsPerpage ); 
         let tiles=[
@@ -125,6 +129,7 @@ createUserModal.addEventListener('hidden.bs.modal', function (event) {
     $('.CU_success').addClass('d-none');
     $('.notSubmittedC').removeClass('d-none');
     $('.SubmittedC').addClass('d-none');
+    $('.err').addClass('d-none');
 });
 
 function DisplayError( id, message){
@@ -155,7 +160,7 @@ function createUser(){
     }
     if( err ) return;  
     $.ajax({ // $.post(...)  : met l'objet en paires dans un corps form-data, alors qu'il est impossible d'envoyer un objet dans un objet !!
-        url: '/users',
+        url: '/api/users',
         type: 'POST',
         data: JSON.stringify({ user : { "username" : username, "email": email, "role": role, "password": psswd1} }),
         contentType: 'application/json; charset=utf-8',
@@ -187,8 +192,8 @@ function createUser(){
                 if( errors.password )
                     DisplayError( "#CU_pwd1", errors.password);
             }
-            $('.notSubmittedC').addClass('d-none');
-            $('.SubmittedC').removeClass('d-none');
+            $('.notSubmittedC').removeClass('d-none');
+            $('.SubmittedC').addClass('d-none');
         }
     });
 }
@@ -211,6 +216,7 @@ EditUserModal.addEventListener('hidden.bs.modal', function (event) {
     $(saveBtn).data( 'userid', null);
     $('.notSubmittedE').removeClass('d-none');
     $('.SubmittedE').addClass('d-none');
+    $('.err').addClass('d-none');
 });
 
 function edit_user( id){
@@ -251,7 +257,7 @@ function updateUser(){
     }
     if( err ) return;  
     $.ajax({ // $.post(...)  : met l'objet en paires dans un corps form-data, alors qu'il est impossible d'envoyer un objet dans un objet !!
-        url: '/users',
+        url: '/api/users',
         type: 'PUT',
         data: JSON.stringify({ user : { "id": userid, "username" : username, "email": email, "role": role, "password": psswd1} }),
         contentType: 'application/json; charset=utf-8',
@@ -287,8 +293,8 @@ function updateUser(){
                 if( errors.password )
                     DisplayError( "#EU_pwd1", errors.password);
             }
-            $('.notSubmittedE').addClass('d-none');
-            $('.SubmittedE').removeClass('d-none');
+            $('.notSubmittedE').removeClass('d-none');
+            $('.SubmittedE').addClass('d-none');
         }
     });
 }
@@ -308,6 +314,7 @@ DeleteUserModal.addEventListener('hidden.bs.modal', function (event) {
     $(deleteBtn).data( 'userid', null);
     $('.notSubmittedD').removeClass('d-none');
     $('.SubmittedD').addClass('d-none');
+    $('.err').addClass('d-none');
 });
 
 function delete_user(id){
@@ -327,7 +334,7 @@ function destroyUser(){
         return;
     }
     $.ajax({ // $.post(...)  : met l'objet en paires dans un corps form-data, alors qu'il est impossible d'envoyer un objet dans un objet !!
-        url: '/users/'+userid,
+        url: '/api/users/'+userid,
         type: 'DELETE',
         dataType: 'json',
         //async: false,
@@ -354,8 +361,8 @@ function destroyUser(){
             }else{
                 DisplayError( '#DU_id', " Une erreur est servenue, Veuillez actualiser la page ! "); 
             }
-            $('.notSubmittedD').addClass('d-none');
-            $('.SubmittedD').removeClass('d-none');
+            $('.notSubmittedD').removeClass('d-none');
+            $('.SubmittedD').addClass('d-none');
         }
     });
 }
