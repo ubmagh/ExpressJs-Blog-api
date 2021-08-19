@@ -8,6 +8,7 @@ var usersRouter = require('./routes/users');
 var articlesRouter = require('./routes/articles');
 var commentsRouter = require('./routes/comments');
 var tagsRouter = require('./routes/tags');
+var authRouter = require('./routes/authentication');
 
 var app = express();
 
@@ -22,5 +23,6 @@ app.use( '/api/users', usersRouter);
 app.use( '/api/articles', articlesRouter);
 app.use( '/api/comments', commentsRouter);
 app.use( '/api/tags', tagsRouter);
+app.use( '/api/auth', authRouter);
 
 module.exports = app;

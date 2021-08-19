@@ -2,7 +2,6 @@ var router = require('express').Router();
 const tagsRepo = require('../repositories/tags');
 const { createTag, updateTag, destroyTag } = require('../controllers/tagController');
 
-/* GET users listing. */
 router.get('/', async function(req, res, next) {
   res.send(await tagsRepo.getAllTags() )
 });

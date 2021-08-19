@@ -2,7 +2,6 @@ var router = require('express').Router();
 const commentsRepo = require('../repositories/comments');
 const { createComment, updateComment, destroyComment } = require('../controllers/commentController');
 
-/* GET users listing. */
 router.get('/', async function(req, res, next) {
   res.send(await commentsRepo.getAllComments() )
 });
