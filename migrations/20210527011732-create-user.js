@@ -22,6 +22,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      token:{
+        type: Sequelize.TEXT
+      },
       role: {
         type: Sequelize.STRING
       },
