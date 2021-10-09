@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+import { ChakraProvider } from "@chakra-ui/react"
+
+// remove 127.0.0.1:3001 next line on production env.
+axios.defaults.baseURL= "127.0.0.1:3001/api/";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider>
+      <App />
+    </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
