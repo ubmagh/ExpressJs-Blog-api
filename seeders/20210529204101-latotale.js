@@ -24,6 +24,7 @@ module.exports = {
         email: faker.internet.email(),
         password: faker.internet.password(),
         role: faker.helpers.randomize([ 'admin', 'author', 'guest']),
+        name: faker.name.firstName()+ ' '+ faker.name.lastName(),
         createdAt: created_at,
         updatedAt: faker.date.between( created_at, new Date())
       });

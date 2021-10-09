@@ -24,6 +24,12 @@ module.exports = {
     getUserByEmail(email) { 
         return User.findOne({ where: { email: email } });
     },
+    getUserByUsername(username) { 
+        return User.findOne({ where: { username: username } });
+    },
+    getUserByToken(token) { 
+        return User.findOne({ where: { token: token } });
+    },
     addUser(user) {
         return User.create({
             username: user.username,

@@ -68,6 +68,17 @@ module.exports = {
         });
     },  
 
+    async getUser( req, res){
+        const token = (req.get('Authorization')+'' ).split(' ').pop()
+        if( !token || token.length==0)
+            return res.status(402).json({ "err": "Invalide Credentiels"});
+        const claims = jwt.verify(token,token_Key);
+        if( !claims)
+            return res.status(402).json({ "err": "Invalide Credentiels"});
+        const user = await usersRepo.getUser(claims.id)
+        return res.json({ "user": JSON.stringify(user) });
+    } 
+
     
 
 }
