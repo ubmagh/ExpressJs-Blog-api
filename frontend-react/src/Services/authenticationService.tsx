@@ -24,6 +24,9 @@ class AuthenticationService extends React.Component<MyProps,UserState> {
     constructor(props:any) {
         super(props);
         this.token = localStorage.getItem('token');
+    }
+
+    componentDidMount(){
         this.checkToken();
     }
 
