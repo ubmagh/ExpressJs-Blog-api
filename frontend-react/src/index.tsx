@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider,ColorModeScript } from "@chakra-ui/react"
+import theme from './Components/theme';
 
 // remove 127.0.0.1:3001 next line on production env.
 axios.defaults.baseURL= "127.0.0.1:3001/api/";
@@ -12,6 +13,7 @@ axios.defaults.baseURL= "127.0.0.1:3001/api/";
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <App />
     </ChakraProvider>
   </React.StrictMode>,

@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <div className="mt-0">
-        <HeaderNav />
+        <HeaderNav authService={ authService } />
 
         <Switch>
           <Route exact path="/">
