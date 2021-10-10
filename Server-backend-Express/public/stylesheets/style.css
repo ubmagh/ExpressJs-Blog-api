@@ -1,0 +1,34 @@
+body {
+  padding: 0px;
+  background-color: #f8f9fa!important;
+}
+
+.ContentWrapper{
+  min-height: 96vh !important;
+}
+
+.navbar{
+  background-color: rgb(5, 148, 148) !important;
+  box-shadow:  0px 5px 5px 3px teal;
+}
+
+#usersList_Loading{
+  height: 50vh;
+  align-items: center;
+  justify-content: center;
+}
+
+table thead tr th {
+  padding: 14px 0px !important;
+}
+#usersList tr td {
+  padding: 10px 0px !important;
+}
+
+footer{
+  position: fixed;
+  width: 100vw;
+  left: 0;
+  bottom: 0px;
+  z-index: 100;
+}
