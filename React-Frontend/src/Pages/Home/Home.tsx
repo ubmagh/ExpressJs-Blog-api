@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from "react-helmet";
+import { Divider, Flex, Box } from '@chakra-ui/react'
 
 export default function Home(props:any){
     return (
@@ -7,7 +8,15 @@ export default function Home(props:any){
             <Helmet> 
                 <title>Blog- Home page</title>
             </Helmet>
-            <h1> Home </h1>
+            <Flex>
+                <Box>
+                    articles
+                </Box>
+                <Divider orientation="vertical" />
+                <Box> 
+                    categories
+                </Box>
+            </Flex>
         </>
     )
 }

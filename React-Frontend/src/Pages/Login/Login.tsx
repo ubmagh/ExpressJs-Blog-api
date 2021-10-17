@@ -1,13 +1,27 @@
 import React from 'react';
 import { Helmet } from "react-helmet";
+import { Flex, Box, Heading, Divider } from '@chakra-ui/react'
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
-export default function Home(props:any){
+
+export default function Login(props:any){
     return (
         <>
-            <Helmet> 
-                <title>Blog- SignIn</title>
+            <Helmet>
+                <title>Blog- Authentication</title>
             </Helmet>
-            <h1> login page </h1>
+            <Flex my="10px" w="100%" display={{base:"block", md:"flex"}}>
+                <Box w={{ base:"100%", "md": "49%"}} py="60px" px="10px" display={{ base:"block", md:"flex" }} flexDirection="column"  justifyContent="center" alignItems="center">
+                    <Heading as="h3" textAlign="center" mt="20px" fontWeight="medium"> Sign-in </Heading>
+                    <LoginForm />
+                </Box>
+                <Divider orientation="vertical" display={{ base: "none", md:"block" }} />
+                <Box py="60px" px="10px" w={{ base:"100%", "md": "49%"}}>
+                    <Heading as="h3" textAlign="center" mt="20px" fontWeight="medium"> Sign-up </Heading>
+                    <RegisterForm />
+                </Box>
+            </Flex>
         </>
     )
 }
