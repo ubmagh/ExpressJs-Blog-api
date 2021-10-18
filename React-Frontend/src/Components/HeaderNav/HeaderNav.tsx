@@ -6,40 +6,50 @@ import { Icon } from "@chakra-ui/react"
 import { FaBlogger, FaSignInAlt, FaUser, FaSun } from "react-icons/fa"
 import { MoonIcon } from  '@chakra-ui/icons'
 import userType from '../../Models/userType.interface';
-import AuthenticationService from '../../Services/authenticationService';
+import { AuthSubscribe } from '../../Services/authenticationService';
 
-const AuthBtn = ({ authService, color }: { authService :AuthenticationService, color:any})=>{
-  if( authService.islogged() )
-  return (
-    <Popover>
-      <PopoverTrigger>
-        <Button  variant="ghost" color={color}>
-          <Icon as={FaUser} boxSize="6" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <PopoverArrow />
-        <PopoverCloseButton />
-        <PopoverHeader> Hi { authService.getuser()?.name } ! </PopoverHeader>
-        <PopoverBody>
-          Settings & logout etc..
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
+const AuthBtn = ({ color }: { color:any})=>{
+
+  return(
+    <AuthSubscribe>
+      { (authService:any) =>{
+        
+        if(  authService.state.logged  ){
+          let user :userType = authService.state!.user!;
+          return (
+            <Popover>
+              <PopoverTrigger>
+                <Button  variant="ghost" color={color}>
+                  <Icon as={FaUser} boxSize="6" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader> Hi { user.name } ! </PopoverHeader>
+                <PopoverBody>
+                  Settings & logout etc..
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
+          );
+        }
+        return (
+          <Tooltip Label="Sign-in or Create an accout" hasArrow placement="bottom" aria-label="A tooltip">
+            <Link to="/login">
+              <Button  variant="ghost" color={color}>
+                <Icon as={FaSignInAlt} boxSize="6" />
+              </Button>
+            </Link>
+          </Tooltip>
+        )
+      
+      }}
+    </AuthSubscribe>
   );
-
-  return (
-    <Tooltip Label="Sign-in or Create an accout" hasArrow placement="bottom" aria-label="A tooltip">
-      <Link to="/login">
-        <Button  variant="ghost" color={color}>
-          <Icon as={FaSignInAlt} boxSize="6" />
-        </Button>
-      </Link>
-    </Tooltip>
-  )
 };
 
-export default function HeaderNav( { authService }: { authService :AuthenticationService} ){
+export default function HeaderNav(){
     const toggleColorMode  = useColorMode().toggleColorMode;
     const iconsColor =  useColorModeValue( "teal.900", "teal.200") ;
     let ThemeIcon =  useColorModeValue(  <MoonIcon boxSize="6" color={iconsColor}/>, <Icon as={FaSun} boxSize="6" color={iconsColor} /> ) ;
@@ -66,7 +76,7 @@ export default function HeaderNav( { authService }: { authService :Authenticatio
                       </Tooltip>
                     </Box>
                     <Box>
-                      <AuthBtn authService={authService} color={iconsColor} />
+                      <AuthBtn color={iconsColor} />
                     </Box>
                   </Flex>
               </Flex>

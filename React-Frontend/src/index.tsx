@@ -8,7 +8,7 @@ import { ChakraProvider,ColorModeScript } from "@chakra-ui/react"
 import theme from './Components/theme';
 
 // remove 127.0.0.1:3001 next line on production env.
-axios.defaults.baseURL= "127.0.0.1:3001/api/";
+axios.defaults.baseURL= "http://127.0.0.1:3001/api/";
 
 ReactDOM.render(
   <React.StrictMode>

@@ -34,7 +34,16 @@ module.exports = {
             );
             user.save().then( async (updatedUser)=>{
                 updatedUser.password=undefined;
-                return res.status(201).json(updatedUser);
+                return res.status(200).json({ 
+                    token: updatedUser.token, 
+                    user: {
+                        id: updatedUser.id,
+                        name: updatedUser.name,
+                        username: updatedUser.username,
+                        role: updatedUser.role,
+                        email: updatedUser.email,
+                    }
+                });
             })
         }else
         return res.status(400).json({ status: "invalidCredentiels"});
@@ -75,8 +84,15 @@ module.exports = {
         const claims = jwt.verify(token,token_Key);
         if( !claims)
             return res.status(402).json({ "err": "Invalide Credentiels"});
-        const user = await usersRepo.getUser(claims.id)
-        return res.json({ "user": JSON.stringify(user) });
+        const user = await usersRepo.getUser(claims.user_id)
+        return res.json({ "user":{ 
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                role: user.role,
+                email: user.email
+            }   
+        });
     } 
 
     

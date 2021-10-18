@@ -1,5 +1,5 @@
 const usersRepo = require('../../repositories/users');
-const [ usernameReg, emailReg ] = [ /^[A-Za-z0-9_.]{3,255}$/g, /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/];
+const [ usernameReg, emailReg ] = [ /^[A-Za-z0-9_.]{3,255}$/g , /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/];
 
 
 module.exports = {
@@ -9,11 +9,11 @@ module.exports = {
         // valider l' username 
         if( !user.username )
             errors.username = " Saisissez le pseudo-nom ";
-        else
+        else{
             if(  (user.username).length<3 || (user.username).length>100 )
                 errors.username = " longueure du pseudo-nom est invalide !";
-            else
-                if( !usernameReg.test(user.username) )
+            else{
+                if( !(usernameReg.test(user.username)) )
                     errors.username = " le pseudo-nom contient des caractères invalides";
                 else{
                     await usersRepo.getUserByUsername(user.username).then( user=>{
@@ -21,6 +21,8 @@ module.exports = {
                         errors.username = " Ce pseudo-nom est pri par autre utilisateur ";
                     }) 
                 } 
+            }
+        }
         
 
         // valider l'email
@@ -125,9 +127,10 @@ module.exports = {
             }else{ //username
                 if(  (creds.usernameOrEmail).length<3 || (creds.usernameOrEmail).length>100 )
                     errors.usernameOrEmail = " longueure du pseudo-nom est invalide !";
-                else
-                    if( !usernameReg.test(creds.usernameOrEmail) )
+                else{
+                    if( !( usernameReg.test(creds.usernameOrEmail) ) )
                         errors.usernameOrEmail = " le pseudo-nom contient des caractères invalides";
+                }
             }
 
         // valider le mdp

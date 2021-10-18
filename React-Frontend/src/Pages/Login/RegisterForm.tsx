@@ -1,6 +1,6 @@
 import React from 'react';
 import { Formik, FormikHelpers } from 'formik'
-import { Box, Button, ButtonGroup, FormLabel,  InputGroup, Input } from '@chakra-ui/react'
+import { Box, ButtonGroup, FormLabel,  InputGroup, Input } from '@chakra-ui/react'
 import { InputControl, SubmitButton } from 'formik-chakra-ui'
 import { loginValidationSchema } from './Validators/Validators'
 
@@ -49,10 +49,10 @@ export default function RegisterForm(){
           </Box>
           
           <Box m="20px auto">  
-            <FormLabel htmlFor="password">password</FormLabel>
+            <FormLabel htmlFor="rpassword">password</FormLabel>
             <InputGroup size="md">
               <Input
-                id="password"
+                id="rpassword"
                 pr="4.5rem"
                 type="password"
               />
